@@ -1,0 +1,31 @@
+{% extends 'pages/base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col border border-secondary p-5 rounded">
+            <h1 class="text-center pb-5">Create a new Link ({{page.slug}})</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group py-4">
+                    <label for="title">Name*</label>
+                    {{form.name}}
+                </div>
+                <div class="text-danger">{{form.name.errors}}</div>
+                
+                <div class="form-group py-4">
+                    <label for="slug">URL*</label>
+                    {{form.url}}
+                </div>
+                <div class="text-danger">{{form.url.errors}}</div>
+                <input type="submit" value="Create" class="btn btn-primary py-2 mt-2"/>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    
+</div>
+
+{% endblock %}

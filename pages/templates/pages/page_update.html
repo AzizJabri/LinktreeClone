@@ -1,0 +1,28 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col border border-secondary p-5 rounded">
+            <h1 class="text-center pb-5">Update Page <br>( {{page.slug}} )</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group py-4">
+                    <label for="title">Title*</label>
+                    {{form.title}}
+                </div>
+                <div class="text-danger">{{form.title.errors}}</div>
+                <div class="form-group py-4">
+                    <label for="slug">Slug*</label>
+                    {{form.slug}}
+                </div>
+                <div class="text-danger">{{form.slug.errors}}</div>
+                <input type="submit" value="Update" class="btn btn-outline-info py-2 mt-2"/>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    
+</div>
+{% endblock %}

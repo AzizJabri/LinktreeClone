@@ -1,0 +1,42 @@
+{% extends 'users/base.html' %}
+
+    {% block title %}
+    <title>Linktree Login</title>
+    {% endblock title %}
+    
+    {% block content %}
+                    <h1 class="text-center pb-5" style="color: #2C3333;">Login Page</h1>
+                    <form method="POST"  role="form">
+                        {% csrf_token %}
+                        <div class="form-froup pb-3">
+                            <label for="email">Email*</label>
+                            {{form.email}}
+                        </div>
+                        <div class="form-froup pb-3">
+                            <label for="password">Password*</label>
+                            {{form.password}}
+                        </div>
+                        <div class="container mt-4">
+                            <div class="row">
+                                <div class="col p-0">
+                                    <input type="submit" value="Login" class="btn text-white" style="background-color: #2C3333;"/>
+                                </div>
+                                <div class="col d-flex align-items-center justify-content-end">
+                                    <span>New here ? </span><a href="{% url 'register' %}" style="color: #395B64;"> Register</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+        
+    {% endblock content %}
+
+
+    {% block under %}
+        <div class="container pt-2">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col text-end text-white"><span class="text-muted">Forgot your password ? </span><a href="{% url 'password_reset' %}" class="text-decoration-none text-white">Reset Password</a></div>
+                <div class="col"></div>
+            </div>
+        </div>
+    {% endblock under %}

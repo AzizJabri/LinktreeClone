@@ -1,0 +1,28 @@
+{% extends 'pages/base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col text-center border border-secondary rounded p-3">
+            <h1 class="py-4">Are you sure you want to delete this page ?</h1>
+            <form action="{% url 'page_delete' page.slug %}" method="POST" class="py-4">
+                {% csrf_token %}
+                <div class="container ">
+                    <div class="row">
+                        <div class="col"><button type="submit" class="btn btn-outline-danger m-3">Delete</button></div>
+                        <div class="col"><a href="{% url 'page_detail' page.slug %}" class="btn btn-outline-success m-3">Go Back</a></div>
+                    </div>
+                </div>
+                
+                
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    
+</div>
+
+{% endblock %}

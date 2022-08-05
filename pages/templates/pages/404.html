@@ -1,0 +1,20 @@
+{% extends 'pages/base.html' %}
+
+
+
+{% block content %}
+
+<div class="d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col border border-secondary rounded p-4">
+            <h1 class="text-danger py-5"> 404 Page not found!</h1>
+            <a href="{% url 'index' %}" class="btn btn-outline-danger my-4">Go Home</a>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

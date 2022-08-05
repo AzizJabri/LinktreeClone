@@ -1,0 +1,49 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+<title>Linktree Register</title>
+{% endblock title %}
+
+{% block content %}
+
+    <h1 class="text-center pb-5" style="color: #2C3333;">Register Page</h1>
+    <form method="POST"  role="form">
+        {% csrf_token %}
+        <div class="form-froup pb-3">
+            <label for="email">Email*</label>
+            {{form.email}}
+        </div>
+        <div class="text-danger">{{form.email.errors}}</div>
+        <div class="form-froup pb-3">
+            <label for="password">First Name*</label>
+            {{form.first_name}}
+        </div>
+        <div class="text-danger">{{form.first_name.errors}}</div>
+        <div class="form-froup pb-3">
+            <label for="password">Last Name*</label>
+            {{form.last_name}}
+        </div>
+        <div class="text-danger">{{form.last_name.errors}}</div>
+        <div class="form-froup pb-3">
+            <label for="password">Password*</label>
+            {{form.password1}}
+        </div>
+        <div class="text-danger">{{form.password1.errors}}</div>
+        <div class="form-froup pb-3">
+            <label for="password">Repeat Password*</label>
+            {{form.password2}}
+        </div>
+        <div class="text-danger">{{form.password2.errors}}</div>
+        
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col p-0">
+                    <input type="submit" value="Register" class="btn text-white" style="background-color: #2C3333;"/>
+                </div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <span>Have an account ? </span><a href="{% url 'login' %}" style="color: #395B64;"> Login</a>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
