@@ -8,11 +8,11 @@
                     <h1 class="text-center pb-5" style="color: #2C3333;">Login Page</h1>
                     <form method="POST"  role="form">
                         {% csrf_token %}
-                        <div class="form-froup pb-3">
+                        <div class="form-group pb-3">
                             <label for="email">Email*</label>
                             {{form.email}}
                         </div>
-                        <div class="form-froup pb-3">
+                        <div class="form-group pb-3">
                             <label for="password">Password*</label>
                             {{form.password}}
                         </div>
