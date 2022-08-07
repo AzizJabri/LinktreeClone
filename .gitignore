@@ -262,7 +262,7 @@ cython_debug/
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
-data
+./data
 # Local History for Visual Studio Code
 .history/
 
@@ -281,5 +281,3 @@ data
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python,visualstudiocode
-
-db_config.json
