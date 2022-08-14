@@ -1,6 +1,6 @@
 FROM python:3.10.0
 
-ENV DockerHOME=/home/app/webapp  
+ENV DockerHOME=/code 
 
 # set work directory  
 RUN mkdir -p $DockerHOME  

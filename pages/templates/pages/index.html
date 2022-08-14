@@ -4,9 +4,91 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linktree Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Linktree Clone -  Landing Page</title>
 </head>
-<body>
-    <h1>HELLO</h1>
+<body class="bg-dark">
+    <div class="container">
+        <nav class="navbar navbar-dark bg-dark pb-5 pt-4">
+            <a class="text-decoration-none text-white display-6 " href="{% url 'dashboard' %}">Linktree Clone</a>
+            <form class="form-inline">
+              <a href="{% url 'page_create' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</a>
+              <a href="{% url 'logout'%}" class="btn btn-outline-info ms-5">Register</a>
+            </form>
+        </nav>
+    </div>
+    <div class="container text-white py-5">
+        <hr>
+
+        <div class="row py-3">
+            <div class="col text-center">
+                <h1 class="display-4">WELCOME TO LINKTREE CLONE</h1>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col"></div>
+            <div class="col p-3 border border-danger rounded">
+                <p class="">
+                    This is a linktree clone created by <a href="https://github.com/AzizJabri" target="_blank" class="text-info">@AzizJb</a> using Django and Postgresql for the backend, HTML and Bootstrap for the frontend.
+                </p>
+                <p>
+                    <strong>This project is just for learning purposes.</strong> 
+                </p>
+            </div>
+            
+            <div class="col"></div>
+        </div>
+        <hr class="py-5">
+        <div class="row pb-5">
+            <div class="col text-center">
+                <h1 class="display-4">FEATURES</h1>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                          <div class="list-group" id="list-tab" role="tablist">
+                            <a class="list-group-item list-group-item-action list-group-item-dark active" id="list-home-list" data-toggle="list" href="#list-auth" role="tab" aria-controls="auth">Authentication</a>
+                            <a class="list-group-item list-group-item-action list-group-item-dark" id="list-profile-list" data-toggle="list" href="#list-linktree" role="tab" aria-controls="linktree">Linktree</a>
+                            <a class="list-group-item list-group-item-action list-group-item-dark" id="list-links-list" data-toggle="list" href="#list-links" role="tab" aria-controls="messages">Links</a>
+                            <a class="list-group-item list-group-item-action list-group-item-dark" id="list-settings-list" data-toggle="list" href="#list-dashboard" role="tab" aria-controls="dashboard">Dashboard</a>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div class="tab-content border border-info p-3 rounded" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-auth" role="tabpanel" aria-labelledby="list-auth-list"><h3>You can login, register, modify your password and reset it.</h3><a class="text-white" href="{% url 'login' %}">Click here to login.</a><br><a class="text-white" href="{% url 'register' %}">Click here to register.</a></div>
+                            <div class="tab-pane fade" id="list-linktree" role="tabpanel" aria-labelledby="list-linktree-list"><h3>You can create a linktree with a custom slug for the url (for now the pages are not customizable).</h3><p>you can access it by visiting {{ request.get_host }}/your_custom_slug.</p><p class="text-muted">Note: your linktree slug is case sensitive!</p></div>
+                            <div class="tab-pane fade" id="list-links" role="tabpanel" aria-labelledby="list-links-list"><h3>You can add, update and/or delete links to the chosen linktree page</h3><p class="text-muted">Note: the link url must be a valid URL (eg https://www.sitename.com)</p></div>
+                            <div class="tab-pane fade" id="list-dashboard" role="tabpanel" aria-labelledby="list-dashboard-list"><h3>Your dashboard show usefull informations about your profile and your linktrees</h3><ul><li>Last login date</li><li>Number of linktrees</li><li>Number of links in every linktree</li><li>(adding more features in the near future)</li></ul></div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="border border-secondary py-4 ">
+        <div class=" container text-center">
+            <p class="text-white">
+                Copyright &copy; 2022 - <a href="https://github.com/AzizJabri" target="_blank" class="text-white">AzizJabri</a>
+            </p>
+        </div>
+    </footer>
+    <div class="fixed-bottom mx-3 ">
+        <h3>
+            <a href="{% url 'index' %}" class="text-decoration-none text-white text-end">Linktree Clone
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="white" d="M7.953 15.066c-.08.163-.08.324-.08.486c.08.517.528.897 1.052.89h1.294v4.776c0 .486-.404.89-.89.89H6.577a.898.898 0 0 1-.889-.891v-4.774H.992c-.728 0-1.214-.729-.89-1.377l6.96-12.627a1.065 1.065 0 0 1 1.863 0l2.913 5.585l-3.885 7.042zm15.945 0l-6.96-12.627a1.065 1.065 0 0 0-1.862 0l-2.995 5.586l3.885 7.04c.081.164.081.326.081.487c-.08.517-.529.897-1.052.89h-1.296v4.776c.005.49.4.887.89.89h2.914a.9.9 0 0 0 .892-.89v-4.775h4.612c.73 0 1.214-.729.89-1.377Z"/></svg>
+
+            </a>
+            
+        </h3>
+    </div>
 </body>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </html>
