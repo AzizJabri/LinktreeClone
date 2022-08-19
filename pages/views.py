@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect, render
@@ -6,6 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Page, Link
 from django.template.defaultfilters import slugify
 from .forms import PageForm, LinkForm
+
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
+import requests
+import json
 
 
 class IndexView(TemplateView):
@@ -25,8 +31,19 @@ class Dashboard(LoginRequiredMixin, TemplateView):
         return render(request, self.template_name, {'pages': pages})
 
 
-class PageView(TemplateView):
+class PageView(TemplateView, HitCountMixin):
     template_name = 'pages/page.html'
+    count_hit = True
+
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+
+        return requests.get(
+            f'https://geolocation-db.com/json/{ip}&position=true').json()
 
     def get_context_data(self, **kwargs):
         try:
@@ -34,11 +51,15 @@ class PageView(TemplateView):
             context['page'] = Page.objects.get(slug=kwargs['slug'])
             context['links'] = Link.objects.filter(
                 page=context['page']).order_by('created_at')
+
             return context
         except Page.DoesNotExist:
             raise Http404("Page does not exist")
 
     def get(self, request, **kwargs):
+        hit_count = HitCount.objects.get_for_object(
+            self.get_context_data(**kwargs)["page"])
+        hit_count_response = HitCountMixin.hit_count(request, hit_count)
         return render(request, self.template_name, self.get_context_data(**kwargs))
 
 
@@ -234,3 +255,21 @@ class LinkDelete(LoginRequiredMixin, TemplateView):
 
 def not_found(request, exception):
     return render(request, 'pages/404.html', status=404)
+
+
+class LinkView(TemplateView, HitCountMixin):
+    count_hit = True
+
+    def get_context_data(self, **kwargs):
+        try:
+            context = super().get_context_data(**kwargs)
+            context['link'] = Link.objects.get(id=kwargs['id'])
+            return context
+        except Link.DoesNotExist:
+            raise Http404("Link does not exist")
+
+    def get(self, request, **kwargs):
+        link = self.get_context_data(**kwargs)['link']
+        hit_count = HitCount.objects.get_for_object(link)
+        hit_count_response = HitCountMixin.hit_count(request, hit_count)
+        return redirect(link.url)

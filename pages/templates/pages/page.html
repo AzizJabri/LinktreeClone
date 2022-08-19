@@ -1,4 +1,7 @@
+
 {% extends "pages/base.html" %}
+
+{% load hitcount_tags %}
 
 {% block title %}
     <title>{{ page.slug }}'s Linktree</title>
@@ -15,9 +18,9 @@
         {% if links %}
             {% for link in links %}
                 <div class="row py-3" style="position: relative;">
-                    <a href="{{link.url}}" target="_blank" class="text-white" style="text-decoration: none;">
+                    <a href="{% url 'link_view' page.slug link.id %}" target="_blank" class="text-white" style="text-decoration: none;">
                         <div class="col w-100 p-3 rounded-pill text-center" style="background-color:#2C3333 ;" >
-                            {{link.name}}
+                            {{link.name}} {% if user == page.user %} | {% get_hit_count for link %} <i class="fa fa-external-link" aria-hidden="true"></i> {% endif %}
                             
                         </div>
                     </a>
@@ -39,9 +42,12 @@
         <div class="row">
             <div class="col text-muted">
                 <p>Created {{page.created_at|timesince}} ago.</p>
+                {% if page.created_at != page.updated_at%}
                 <p>Last Updated {{page.updated_at|timesince}} ago.</p>
+                {% endif %}
             </div>
-            <strong>@{{page.user.first_name}}</strong>
+            <strong>@{{page.user.first_name}}_{{page.user.last_name}}{% if user == page.user %} | {% get_hit_count for page %} <i class="fa fa-eye" aria-hidden="true"></i> {%endif%}</strong>
+            
         </div>
         
     </div> 

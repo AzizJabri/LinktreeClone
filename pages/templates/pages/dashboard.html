@@ -1,4 +1,5 @@
 {% extends 'pages/base.html' %}
+{% load hitcount_tags %}
 
     
     {% block title %}
@@ -30,28 +31,40 @@
         <div class="container p-3">
             <h1>Your pages : {{ pages|length }}</h1>
         </div>
-        <div class="container col-sm">
-            <ul class="list-group">
-                {% if pages %}
-                    {% for page in pages %}
-                    <a href="{% url 'page_detail' page.slug %}" class="text-decoration-none rounded-pill py-2"> 
-                        <li class="list-group-item d-flex justify-content-between align-items-center bg-secondary text-white">
-                        {{page.title}}
-                        <span class="badge badge-primary badge-pill text-dark">
-                            {% if page.get_links_count == 1  %}
-                                {{page.get_links_count}} link
-                            {% else %}
-                                {{page.get_links_count}} links
-                            {% endif %}
-                        </span>
-                      </li>
-                    </a>
-                    {% endfor %}
-                {% else %}
-                    <h3>You have no pages !</h3>
-                {%endif%}
-                
-            </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col border border-top-0 border-bottom-0 border-start-0 border-secondary">
+                    <ul class="list-group">
+                        {% if pages %}
+                            {% for page in pages %}
+                            <a href="{% url 'page_detail' page.slug %}" class="text-decoration-none rounded-pill py-2"> 
+                                <li class="list-group-item d-flex justify-content-between align-items-center bg-secondary text-white">
+                                {{page.title}}
+                                <span class="badge badge-primary badge-pill text-dark">
+                                    {% if page.get_links_count == 1  %}
+                                        {{page.get_links_count}} link
+                                    {% else %}
+                                        {{page.get_links_count}} links
+                                    {% endif %}
+                                </span>
+                                <span>
+                                {% get_hit_count for page %} <i class="fa fa-eye" aria-hidden="true"></i>
+        
+                                </span>
+                              </li>
+                            </a>
+                            {% endfor %}
+                        {% else %}
+                            <h3>You have no pages !</h3>
+                        {%endif%}
+                        
+                    </ul>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

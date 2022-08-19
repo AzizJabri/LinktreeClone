@@ -12,19 +12,6 @@ services:
       - 5432:5432
     restart: unless-stopped
   
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    env_file:
-      - ./.env
-    volumes:
-       - pgadmin_data:/var/lib/pgadmin
-
-    ports:
-      - "${PGADMIN_PORT:-5050}:80"
-    restart: unless-stopped
-    depends_on:
-      - pgdb
   web:
     container_name: django
     build: .
@@ -42,4 +29,3 @@ services:
       - pgdb
 volumes:
   postgres_data:
-  pgadmin_data:
