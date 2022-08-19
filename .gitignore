@@ -285,3 +285,6 @@ cython_debug/
 ./data/
 .data/
 data/
+
+
+static/

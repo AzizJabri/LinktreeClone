@@ -7,14 +7,35 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Linktree Clone -  Landing Page</title>
+    <style>
+        ::-webkit-scrollbar {
+        width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+        background: #212529;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+        background: #303846;
+        border-radius: 5px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+        background: #5a5f69;
+        }
+    </style>
 </head>
 <body class="bg-dark">
     <div class="container">
         <nav class="navbar navbar-dark bg-dark pb-5 pt-4">
             <a class="text-decoration-none text-white display-6 " href="{% url 'dashboard' %}">Linktree Clone</a>
             <form class="form-inline">
-              <a href="{% url 'page_create' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</a>
-              <a href="{% url 'logout'%}" class="btn btn-outline-info ms-5">Register</a>
+              <a href="{% url 'login' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</a>
+              <a href="{% url 'register'%}" class="btn btn-outline-info ms-5">Register</a>
             </form>
         </nav>
     </div>

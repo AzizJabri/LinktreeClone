@@ -15,4 +15,6 @@ urlpatterns = [
          LinkUpdate.as_view(), name="link_update"),
     path("<slug:slug>/link/<int:id>/delete/",
          LinkDelete.as_view(), name="link_delete"),
+    path("<slug:slug>/link/<int:id>/view/",
+         LinkView.as_view(), name="link_view"),
 ]

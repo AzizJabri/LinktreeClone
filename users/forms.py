@@ -55,7 +55,7 @@ class RegisterForm(UserCreationForm):
                                 widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password',
                                                                   'class': 'form-control',
                                                                   'data-toggle': 'password',
-                                                                  'id': 'password',
+                                                                  'id': 'password1',
                                                                   }))
 
     class Meta:
@@ -67,6 +67,7 @@ class LoginForm(forms.Form):
     email = forms.EmailField(required=True,
                              widget=forms.TextInput(attrs={'placeholder': 'Email',
                                                            'class': 'form-control',
+                                                           'id': 'email',
                                                            }))
     password = forms.CharField(max_length=50,
                                required=True,
@@ -154,7 +155,7 @@ class PasswordResetForm(forms.Form):
         domain_override=None,
         subject_template_name="registration/password_reset_subject.txt",
         email_template_name="registration/password_reset_email.html",
-        use_https=False,
+        use_https=True,
         token_generator=default_token_generator,
         from_email=None,
         request=None,
@@ -182,7 +183,7 @@ class PasswordResetForm(forms.Form):
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "user": user,
                 "token": token_generator.make_token(user),
-                "protocol": "https" if use_https else "http",
+                "protocol": "https",
                 **(extra_email_context or {}),
             }
             self.send_mail(
@@ -207,7 +208,7 @@ class SetPasswordForm(forms.Form):
     new_password1 = forms.CharField(
         label=_("New password"),
         widget=forms.PasswordInput(
-            attrs={"autocomplete": "new-password", 'class': 'form-control'}),
+            attrs={"autocomplete": "new-password", 'class': 'form-control', 'id': 'password1'}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
@@ -215,7 +216,7 @@ class SetPasswordForm(forms.Form):
         label=_("New password confirmation"),
         strip=False,
         widget=forms.PasswordInput(
-            attrs={"autocomplete": "new-password", 'class': 'form-control'}),
+            attrs={"autocomplete": "new-password", 'class': 'form-control', 'id': 'password2'}),
     )
 
     def __init__(self, user, *args, **kwargs):
@@ -259,7 +260,7 @@ class PasswordChangeForm(SetPasswordForm):
         strip=False,
         widget=forms.PasswordInput(
             attrs={"autocomplete": "current-password",
-                   "autofocus": True, 'class': 'form-control'}
+                   "autofocus": True, 'class': 'form-control', 'id': 'old_password', }
         ),
     )
 

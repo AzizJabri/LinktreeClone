@@ -10,11 +10,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import resolve_url
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.forms import (
-    PasswordChangeForm,
-    PasswordResetForm,
-    SetPasswordForm,
-)
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login as auth_login
@@ -26,8 +22,10 @@ from django.views.generic import TemplateView
 from django.views import View
 from django.conf import settings
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm
-from django.contrib.auth import get_user_model
+from .forms import (RegisterForm, LoginForm, PasswordChangeForm,
+                    PasswordResetForm,
+                    SetPasswordForm,)
+
 
 UserModel = get_user_model()
 
