@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import resolve_url
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.contrib.auth.tokens import default_token_generator
+from django.template.defaultfilters import slugify
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
@@ -24,9 +25,9 @@ from django.conf import settings
 from django.contrib import messages
 from .forms import (RegisterForm, LoginForm, PasswordChangeForm,
                     PasswordResetForm,
-                    SetPasswordForm,)
-
-
+                    SetPasswordForm, ProfileForm)
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Profile
 UserModel = get_user_model()
 
 
@@ -90,6 +91,12 @@ class RegisterView(View):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            profile = Profile.objects.create(
+                user=user)
+            profile.save()
+            profile.username = slugify(
+                user.first_name + user.last_name + str(profile.id))
+            profile.save()
             login(request, user)
             messages.success(
                 request, f'Registered successfully ! You are now logged in as {user.email}')
@@ -274,3 +281,27 @@ class PasswordChangeDoneView(PasswordContextMixin, TemplateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+
+
+class ProfileView(LoginRequiredMixin, FormView):
+    form_class = ProfileForm
+    template_name = "users/profile.html"
+    title = _("Profile")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = Profile.objects.get(user=self.request.user)
+        return context
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(instance=self.get_context_data()['profile'])
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(
+            request.POST, request.FILES, instance=self.get_context_data()['profile'])
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Profile updated successfully"))
+            return redirect('dashboard')
+        return render(request, self.template_name, {'form': form})
