@@ -22,3 +22,16 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return self.email
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='profile')
+    username = models.CharField(max_length=30, default=user.first_name)
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True)
+
+    def __str__(self) -> str:
+        return self.user.email
