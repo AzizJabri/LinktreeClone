@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block content %}
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+
 <div class="container">
     <div class="row">
         <div class="col"></div>
-        <div class="col bg-secondary p-5 rounded">
+        <div class="col border border-secondary p-5 rounded">
             <h1 class="text-center pb-5">Update Link</h1>
             <form method="post">
                 {% csrf_token %}
@@ -28,7 +30,7 @@
         </div>
         <div class="col"></div>
     </div>
-    
+</div>
 </div>
 
 {% endblock %}

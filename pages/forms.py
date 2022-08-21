@@ -1,5 +1,5 @@
 from django import forms
-from .models import Page, Link
+from .models import Page, Link, PageDecorator, LinkDecorator
 
 
 class PageForm(forms.ModelForm):
