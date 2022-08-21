@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1',
                  "app-linktree.herokuapp.com", "0.0.0.0"]
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'pages',
     # "mailer",
     "hitcount",
+    "colorfield",
 ]
 
 MIDDLEWARE = [
@@ -180,7 +181,4 @@ CSRF_TRUSTED_ORIGINS = ['https://app-linktree.herokuapp.com']
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+STATIC_ROOT = BASE_DIR / 'static'

@@ -1,0 +1,89 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+    
+{% block title %}
+<title>Customize - {{page.slug }}</title> 
+{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col border border-secondary p-5 rounded" style="background-color: {{page.decorator.card_color}} ;" id="card">
+                <h1 class="text-center pb-4">Customize Your Page</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group py-4">
+                        <label for="bgc">Background Color</label>
+                        <input class="form-control border border-dark" value="{{page.decorator.background_color}}" data-jscolor="{}" id="background_color" name="background_color">
+                    </div>
+
+                    <div class="form-group py-4">
+                        <label for="bgc">Card Background Color</label>
+                        <input class="form-control border border-dark" value="{{page.decorator.card_color}}" data-jscolor="{}" id="card_color" name="card_color">
+                    </div>
+                    
+                    <div class="form-group py-4">
+                        <label for="tc">Text Color</label>
+                        <input class="form-control border border-dark" value="{{page.decorator.text_color}}" data-jscolor="{}" id="text_color" name="text_color">
+                    </div>
+                    <div class="form-check pb-4">
+                        <input class="form-check-input" type="checkbox" value="{{page.decorator.show_date}}" name="show_date" id="flexCheckDefault show_date" {% if page.decorator.show_date %} checked {% endif %}>
+                        <label class="form-check-label" for="flexCheckDefault">
+                          <strong>Show Date</strong>
+                        </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" value="Submit" class="btn btn-success py-2 mt-2"/>
+                        </div>
+                        <div class="col text-end">
+                            <a href="{% url 'page_detail' page.slug %}" class="btn btn-danger py-2 mt-2">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+            <div class="col"></div>
+        </div>
+        
+    </div>
+    
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+{% block scripts %}
+<script src="{% static 'colorfield/jscolor/jscolor.js' %}"></script>
+<script>
+    $(document).ready(function(){
+        $('#background_color').change(function(){
+            var bgc = $('#background_color').val();
+            $('body').css('background-color', bgc);
+        });
+        $('#card_color').change(function(){
+            var bgc = $('#card_color').val();
+            $('#card').css('background-color', bgc);
+        });
+        $('#text_color').change(function(){
+            var bgc = $('#text_color').val();
+            $('body').css('color', bgc);
+        });
+        $("input[name='show_date']").change(function(){
+            if($(this).is(":checked")){
+                $("input[name='show_date']").val("True");
+            }else{
+                $("input[name='show_date']").val("False");
+            }
+        });
+    });
+
+</script>
+{% endblock scripts %}
