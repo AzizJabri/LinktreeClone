@@ -1,3 +1,4 @@
+from .custom_fields import COUNTRIES
 from django.utils.translation import gettext_lazy as _
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
@@ -11,6 +12,7 @@ from django import forms
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import UserCreationForm
 import unicodedata
+from .models import Profile
 
 UserModel = get_user_model()
 
@@ -277,3 +279,31 @@ class PasswordChangeForm(SetPasswordForm):
                 code="password_incorrect",
             )
         return old_password
+
+
+class ProfileForm(forms.ModelForm):
+    username = forms.CharField(
+        label=_("Username"),
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'id': 'username'}),
+        max_length=30,
+        min_length=5,
+        required=True,
+    )
+    location = forms.ChoiceField(
+        label=_("Location"),
+        widget=forms.Select(
+            attrs={'class': 'form-control', 'id': 'location'}),
+        choices=COUNTRIES,
+        required=True,
+    )
+    avatar = forms.ImageField(label=_('Company Logo'), required=False, error_messages={'invalid': _(
+        "Image files only")}, widget=forms.FileInput(attrs={'class': 'form-control', 'id': 'avatar'}))
+
+    class Meta:
+        model = Profile
+        fields = ['username', 'bio', 'location', 'birth_date', 'avatar']
+        widgets = {
+            'bio': forms.TextInput(attrs={'class': 'form-control', 'id': 'bio'}),
+            'birth_date': forms.TextInput(attrs={'class': 'form-control', 'id': 'birth_date', 'type': 'date'}),
+        }
