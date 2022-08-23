@@ -1,3 +1,4 @@
+from queue import Empty
 from .custom_fields import COUNTRIES
 from django.utils.translation import gettext_lazy as _
 from django.utils.http import urlsafe_base64_encode
@@ -297,7 +298,7 @@ class ProfileForm(forms.ModelForm):
         choices=COUNTRIES,
         required=True,
     )
-    avatar = forms.ImageField(label=_('Company Logo'), required=False, error_messages={'invalid': _(
+    avatar = forms.ImageField(label=_('Avatar'), required=False, error_messages={'invalid': _(
         "Image files only")}, widget=forms.FileInput(attrs={'class': 'form-control', 'id': 'avatar'}))
 
     class Meta:

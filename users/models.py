@@ -7,6 +7,7 @@ from django.template.defaultfilters import slugify
 from datetime import datetime
 from PIL import Image
 from .custom_fields import CountryField
+from .utils import image_resize
 # create custom user model
 
 
@@ -43,27 +44,9 @@ class Profile(models.Model):
         return self.user.email
 
     def save(self, *args, **kwargs):
-        super(Profile, self).save(*args, **kwargs)
-        if not self.username:
-            self.username = slugify(
-                self.user.first_name + ' ' + self.user.last_name + ' ' + str(self.id))
-            self.save()
-
-        img = Image.open(self.avatar.path)
-        if img.width > img.height:
-            x = (img.width / 2) - (img.height / 2)
-            box = (x, 0, x + img.height, img.height)
-            cropped_image = img.crop(box)
-            if cropped_image.height > 500 or cropped_image.width > 500:
-                new_image = cropped_image.resize((500, 500))
-                new_image.save(self.avatar.path)
-        elif img.width < img.height:
-            x = (img.height / 2) - (img.width / 2)
-            box = (0, x, img.width, x + img.width)
-            cropped_image = img.crop(box)
-            if cropped_image.height > 500 or cropped_image.width > 500:
-                new_image = cropped_image.resize((500, 500))
-                new_image.save(self.avatar.path)
-        else:
-            image = img.resize((500, 500))
-            image.save(self.avatar.path)
+        new_width = 300
+        new_height = 300
+        if self.avatar:
+            image_resize(self.avatar, new_width, new_height)
+        # run save of parent class above to save original image to disk
+        super().save(*args, **kwargs)
