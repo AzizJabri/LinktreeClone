@@ -173,7 +173,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 """
 
-#CSRF_TRUSTED_ORIGINS = ['https://app-linktree.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://app-linktree.herokuapp.com']
 
 
 STATICFILES_DIRS = [
