@@ -26,13 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 "app-linktree.herokuapp.com", "0.0.0.0"]
-
-"""
-if IS_HEROKU:
-    ALLOWED_HOSTS = ["*"]
+IS_DEBUG = "True"
+if IS_DEBUG == "True":
+    DEBUG = True
 else:
     DEBUG = False
 
@@ -43,7 +39,7 @@ IS_RAILWAY = os.environ.get('IS_RAILWAY')
 RAILWAY_URL = os.environ.get('RAILWAY_URL')
 
 if IS_RAILWAY == "True":
-    ALLOWED_HOSTS += [RAILWAY_URL]
+    ALLOWED_HOSTS.append(RAILWAY_URL)
 
 
 # Application definition
@@ -57,13 +53,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'pages',
+    # "mailer",
     "hitcount",
     "colorfield",
-    'storages',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -148,6 +145,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -181,24 +179,10 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 """
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CSRF_TRUSTED_ORIGINS = ['https://app-linktree.herokuapp.com']
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles'),
-]
-
-
-DEFAULT_FILE_STORAGE = 'linktree.custom_azure.AzureMediaStorage'
-STATICFILES_STORAGE = 'linktree.custom_azure.AzureStaticStorage'
-
-STATIC_LOCATION = "static"
-MEDIA_LOCATION = "media"
-AZURE_OVERWRITE_FILES = True
-AZURE_ACCOUNT_NAME = "linktree"
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+STATIC_ROOT = BASE_DIR / 'static'
