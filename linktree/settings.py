@@ -40,7 +40,6 @@ RAILWAY_URL = os.environ.get('RAILWAY_URL')
 
 if IS_RAILWAY == "True":
     ALLOWED_HOSTS += [RAILWAY_URL]
-    DEBUG = False
 
 
 # Application definition
