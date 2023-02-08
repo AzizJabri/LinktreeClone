@@ -39,7 +39,7 @@ IS_RAILWAY = os.environ.get('IS_RAILWAY')
 RAILWAY_URL = os.environ.get('RAILWAY_URL')
 
 if IS_RAILWAY == "True":
-    ALLOWED_HOSTS += [RAILWAY_URL]
+    ALLOWED_HOSTS.append(RAILWAY_URL)
 
 
 # Application definition
