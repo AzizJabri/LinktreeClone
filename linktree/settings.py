@@ -26,13 +26,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+IS_DEBUG = os.environ.get('IS_DEBUG')
+if IS_DEBUG == "True":
+    DEBUG = True
+else:
+    DEBUG = False
+
+
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"]
 
 IS_RAILWAY = os.environ.get('IS_RAILWAY')
 RAILWAY_URL = os.environ.get('RAILWAY_URL')
 
-if IS_RAILWAY:
+if IS_RAILWAY == "True":
     ALLOWED_HOSTS += [RAILWAY_URL]
     DEBUG = False
 
