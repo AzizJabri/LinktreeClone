@@ -33,13 +33,8 @@ else:
     DEBUG = False
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"]
-
-IS_RAILWAY = os.environ.get('IS_RAILWAY')
-RAILWAY_URL = os.environ.get('RAILWAY_URL')
-
-if IS_RAILWAY == "True":
-    ALLOWED_HOSTS.append(RAILWAY_URL)
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0",
+                 "linktreeclone-production.up.railway.app"]
 
 
 # Application definition
