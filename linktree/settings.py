@@ -175,7 +175,7 @@ SECURE_HSTS_PRELOAD = True
 """
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-CSRF_TRUSTED_ORIGINS = ['https://app-linktree.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://linktreeclone-production.up.railway.app']
 
 
 MEDIA_ROOT = BASE_DIR / 'media'
