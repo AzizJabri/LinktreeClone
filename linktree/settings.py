@@ -34,8 +34,16 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1',
 if IS_HEROKU:
     ALLOWED_HOSTS = ["*"]
 else:
-    ALLOWED_HOSTS = []
-"""
+    DEBUG = False
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"]
+
+IS_RAILWAY = os.environ.get('IS_RAILWAY')
+RAILWAY_URL = os.environ.get('RAILWAY_URL')
+
+if IS_RAILWAY == "True":
+    ALLOWED_HOSTS += [RAILWAY_URL]
 
 
 # Application definition
