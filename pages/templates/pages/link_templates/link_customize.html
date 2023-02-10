@@ -9,10 +9,9 @@
 <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="container">
         <div class="row">
-            <div class="col"></div>
-            <div class="col border border-secondary p-5 rounded" style="background-color: {{page.decorator.card_color}} ;" id="card">
-                <h1 class="text-center pb-5">Customize Your Link</h1>
-
+            <div class="col col-md-4 mx-auto border border-secondary p-5 rounded" style="background-color: {{page.decorator.card_color}} ;" id="card">
+                <h1 class="text-center pb-4">Customize Your Link</h1>
+                <hr>
                 <a id="text" style="text-decoration: none; color: {{link.decorator.text_color}};">
                     <div class="col w-100 p-3 rounded-pill text-center" id="link" style="background-color: {{link.decorator.background_color}} ;" >
                         {{link.name}}
@@ -41,7 +40,6 @@
                 </form>
                 
             </div>
-            <div class="col"></div>
         </div>
         
     </div>

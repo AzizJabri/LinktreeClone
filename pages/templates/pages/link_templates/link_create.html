@@ -9,9 +9,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col"></div>
-        <div class="col border border-secondary p-5 rounded" style="background-color:{{page.decorator.card_color}} ;">
-            <h1 class="text-center pb-5">Create a new Link ({{page.slug}})</h1>
+        <div class="col col-md-4 mx-auto border border-secondary p-5 rounded" style="background-color:{{page.decorator.card_color}} ;">
+            <h1 class="text-center pb-4">Create a new Link ({{page.slug}})</h1>
+            <hr>
             <form method="post">
                 {% csrf_token %}
                 <div class="form-group py-4">
@@ -28,7 +28,6 @@
                 <input type="submit" value="Create" class="btn btn-primary py-2 mt-2"/>
             </form>
         </div>
-        <div class="col"></div>
     </div>
 </div>
 </div>

@@ -6,7 +6,8 @@
 
 {% block content %}
 
-    <h1 class="text-center pb-5" style="color: #2C3333;">Register Page</h1>
+    <h1 class="text-center pb-3" style="color: #2C3333;">Register Page</h1>
+    <hr>
     <form method="POST"  role="form">
         {% csrf_token %}
         <div class="form-group pb-3">
@@ -43,10 +44,10 @@
         <div class="container mt-4">
             <div class="row">
                 <div class="col p-0">
-                    <input type="submit" value="Register" class="btn text-white" style="background-color: #2C3333;"/>
+                    <input type="submit" value="Register" class="btn px-5 text-white" style="background-color: #2C3333;"/>
                 </div>
                 <div class="col d-flex align-items-center justify-content-end">
-                    <span>Have an account ? </span><a href="{% url 'login' %}" style="color: #395B64;"> Login</a>
+                    <span>Have an account ? </span><a href="{% url 'login' %}" class="text-white ps-1"> Login</a>
                 </div>
             </div>
         </div>

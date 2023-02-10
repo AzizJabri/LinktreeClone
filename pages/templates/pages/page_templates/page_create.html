@@ -9,8 +9,7 @@
 <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="container">
         <div class="row">
-            <div class="col"></div>
-            <div class="col border border-secondary p-5 rounded">
+            <div class="col col-md-4 mx-auto border border-secondary p-5 rounded">
                 <h1 class="text-center pb-5">Create a new Page</h1>
                 <form method="post">
                     {% csrf_token %}
@@ -29,7 +28,6 @@
                 </form>
                 
             </div>
-            <div class="col"></div>
         </div>
         
     </div>
@@ -38,16 +36,26 @@
 
 {% endblock content %}
 
-
 {% block navbar %}
-<nav class="navbar navbar-dark bg-dark pb-2 pt-2">
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark py-2">
     <a class="text-decoration-none text-white display-6 " href="{% url 'dashboard' %}">Linktree Clone</a>
-    <form class="form-inline">
-      <a href="{% url 'dashboard' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa-solid fa-house"></i> Home</a>
-      <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-5"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout ({{user.profile.username}})</a>
-      <a href="{% url 'profile' %}"><img class="img-fluid rounded-pill mx-2 ms-3 border border-success " src="{{user.profile.get_avatar_url}}" alt="" width="40px"></a>
-
-    </form>
-  </nav>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav" style="margin-left: auto;">
+            <li class="nav-item my-2 me-4">
+                    <a href="{% url 'dashboard' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa-solid fa-house"></i> Home</a>
+                </li>
+                <li class="nav-item my-2 me-4">
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout ({{user.profile.username}})</a>
+                </li>
+                <li class="nav-item my-2">
+                    <a href="{% url 'profile' %}"><img class="img-fluid rounded-pill mx-2  border border-success " src="{{user.profile.get_avatar_url}}" alt="" width="40px"></a>
+                </li>
+            </ul>
+        </div>
+</div>
+</nav>
 {% endblock navbar %}
 

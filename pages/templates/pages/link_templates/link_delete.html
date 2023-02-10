@@ -9,8 +9,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col"></div>
-        <div class="col text-center border border-secondary rounded p-3" style="background-color:{{link.page.decorator.card_color}} ; color:{{link.page.decorator.text_color}};">
+        <div class="col col-md-4 mx-auto text-center border border-secondary rounded p-3" style="background-color:{{link.page.decorator.card_color}} ; color:{{link.page.decorator.text_color}};">
             <h1 class="py-4">Are you sure you want to delete this Link ?</h1>
             <form action="{% url 'link_delete' link.page.slug link.id %}" method="POST" class="py-4">
                 {% csrf_token %}
@@ -32,7 +31,6 @@
                 
             </form>
         </div>
-        <div class="col"></div>
     </div>
 </div>
 </div>

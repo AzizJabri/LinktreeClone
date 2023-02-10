@@ -5,7 +5,8 @@
     {% endblock title %}
     
     {% block content %}
-                    <h1 class="text-center pb-5" style="color: #2C3333;">Login Page</h1>
+                    <h1 class="text-center pb-3" style="color: #2C3333;">Login Page</h1>
+                    <hr>
                     <form method="POST"  role="form">
                         {% csrf_token %}
                         <div class="form-group pb-3">
@@ -25,10 +26,10 @@
                         <div class="container mt-4">
                             <div class="row">
                                 <div class="col p-0">
-                                    <input type="submit" value="Login" class="btn text-white" style="background-color: #2C3333;"/>
+                                    <input type="submit" value="Login" class="btn px-5 text-white" style="background-color: #2C3333;"/>
                                 </div>
                                 <div class="col d-flex align-items-center justify-content-end">
-                                    <span>New here ? </span><a href="{% url 'register' %}" style="color: #395B64;"> Register</a>
+                                    <span>New here ?</span><a href="{% url 'register' %}" class="text-white ps-1"> Register</a>
                                 </div>
                             </div>
                         </div>
@@ -40,9 +41,7 @@
     {% block under %}
         <div class="container pt-2">
             <div class="row">
-                <div class="col"></div>
-                <div class="col text-end text-white"><span class="text-muted">Forgot your password ? </span><a href="{% url 'password_reset' %}" class="text-decoration-none text-white">Reset Password</a></div>
-                <div class="col"></div>
+                <div class="col col-md-4 mx-auto text-end text-white"><span class="text-muted">Forgot your password ? </span><a href="{% url 'password_reset' %}" class="text-decoration-none text-white">Reset Password</a></div>
             </div>
         </div>
     {% endblock under %}

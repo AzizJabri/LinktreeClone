@@ -11,136 +11,143 @@
 <div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="container">
         <div class="row">
-            <div class="col"></div>
-            <div class="col rounded p-3" style="background-color: {{page.decorator.card_color|default_if_none:"#A5C9CA"}};">
-                <h1 class=" rounded-pill p-2 text-center " style="font-size:2.5vw ;">{{page.title}}</h1>
+            <div class="col col-md-4 mx-auto rounded p-3" style="background-color: {{page.decorator.card_color|default_if_none:"#A5C9CA"}};">
+                <h1 class=" rounded-pill p-2 text-center display-6" >{{page.title}}</h1>
                 <hr>
-    <div class="container pt-3" >
-        {% if links %}
-            {% for link in links %}
-                <div class="row pb-4" style="position: relative;">
-                    <a href="{% url 'link_view' page.slug link.id %}" target="_blank" style="text-decoration: none; color: {{link.decorator.text_color}};">
-                        <div class="col w-100 p-3 rounded-pill text-center" style="background-color:{{link.decorator.background_color}} ;" >
-                            {{link.name}} {% if user == page.user %} | {% get_hit_count for link %} <i class="fa fa-external-link" aria-hidden="true"></i> {% endif %}
-                            
-                        </div>
-                    </a>
-                    {% if page.user == user %}
-                        <div class="container pt-1">
-                            <div class="row text-center">
-                                <div class="col "><a href="{% url 'link_update' page.slug link.id %}" class="text-decoration-none text-white btn btn-warning btn-sm"><i class="fa-solid fa-pencil"></i></a></div>
-                                <div class="col"><a href="{% url 'link_customize' page.slug link.id %}" class="text-decoration-none text-white btn btn-info btn-sm"><i class="fa-solid fa-brush"></i></a></div>
-                                <div class="col"><a href="{% url 'link_delete' page.slug link.id %}" class="text-decoration-none text-white btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a></div>
-                                
+                <div class="container pt-3" >
+                    {% if links %}
+                        {% for link in links %}
+                            <div class="row pb-4" style="position: relative;">
+                                <a href="{% url 'link_view' page.slug link.id %}" target="_blank" style="text-decoration: none; color: {{link.decorator.text_color}};">
+                                    <div class="col w-100 p-3 rounded-pill text-center" style="background-color:{{link.decorator.background_color}} ;" >
+                                        {{link.name}} {% if user == page.user %} | {% get_hit_count for link %} <i class="fa fa-external-link" aria-hidden="true"></i> {% endif %}
+                                        
+                                    </div>
+                                </a>
+                                {% if page.user == user %}
+                                    <div class="container pt-1">
+                                        <div class="row text-center">
+                                            <div class="col "><a href="{% url 'link_update' page.slug link.id %}" class="text-decoration-none text-white btn btn-warning btn-sm"><i class="fa-solid fa-pencil"></i></a></div>
+                                            <div class="col"><a href="{% url 'link_customize' page.slug link.id %}" class="text-decoration-none text-white btn btn-info btn-sm"><i class="fa-solid fa-brush"></i></a></div>
+                                            <div class="col"><a href="{% url 'link_delete' page.slug link.id %}" class="text-decoration-none text-white btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a></div>
+                                            
+                                        </div>
+                                    </div> 
+                                {% endif %}  
                             </div>
-                        </div> 
-                    {% endif %}  
+                        {% endfor %}
+                    {% else %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-8">
+                                <strong>This page have no links !</strong>
+                            </div>
+                            <div class="col text-end">
+                                <a href="{% url 'link_create' page.slug %}" class="btn btn-success"><i class="fa-solid fa-square-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-            {% endfor %}
-        {% else %}
-        <div class="container">
-            <div class="row">
-                <div class="col-8">
-                    <strong>This page have no links !</strong>
-                </div>
-                <div class="col text-end">
-                    <a href="{% url 'link_create' page.slug %}" class="btn btn-success"><i class="fa-solid fa-square-plus"></i></a>
-                </div>
+                <hr>
+                <div class="container pt-3">
+                    <div class="row">
+                        {% if page.decorator.show_date %}
+                        <div class="col text-muted">
+                            <span class="">Created {{page.created_at|timesince}} ago.</span>
+                            {% if page.created_at != page.updated_at%}
+                            <p>Last updated {{page.updated_at|timesince}} ago.</p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        <strong>@{{page.user.profile.username}}{% if user == page.user %} | {% get_hit_count for page %} <i class="fa fa-eye" aria-hidden="true"></i> {%endif%}</strong>
+                    </div>
+                </div> 
             </div>
-        </div>
-        {% endif %}
-    </div>
-    <hr>
-    <div class="container pt-3">
-        <div class="row">
-            {% if page.decorator.show_date %}
-            <div class="col text-muted">
-                <span class="">Created {{page.created_at|timesince}} ago.</span>
-                {% if page.created_at != page.updated_at%}
-                <p>Last updated {{page.updated_at|timesince}} ago.</p>
-                {% endif %}
-            </div>
-            {% endif %}
-            <strong>@{{page.user.profile.username}}{% if user == page.user %} | {% get_hit_count for page %} <i class="fa fa-eye" aria-hidden="true"></i> {%endif%}</strong>
-            
-        </div>
-        
-    </div> 
-            </div>
-            <div class="col"></div>
         </div> 
     </div>
-</div>  
+</div>
+    
 {% endblock content %}
 
 {% block navbar %}
 {% if user.is_authenticated and user == page.user %}
-<nav class="navbar navbar-dark bg-dark pb-2 pt-2">
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark py-2">
     <a class="text-decoration-none text-white display-6 " href="{% url 'dashboard' %}">Linktree Clone</a>
-    <form class="form-inline">
-        <div class="dropdown show">
-            <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Actions
-            </a>
-          
-            <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
-                <a href="{% url 'page_customize' page.slug %}" class="dropdown-item btn btn-outline-secondary my-sm-0 text-white " type="submit">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-start">
-                                Customize
-                            </div>
-                            <div class="col text-end">
-                                <i class="fa-solid fa-brush"></i>
-                            </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav" style="margin-left: auto;">
+                <li class="nav-item my-2 me-4">
+                    <div class="dropdown show">
+                        <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                        </a>
+                    
+                        <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink">
+                            <a href="{% url 'page_customize' page.slug %}" class="dropdown-item btn btn-outline-secondary my-sm-0 text-white " type="submit">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            Modify
+                                        </div>
+                                        <div class="col text-end">
+                                            <i class="fa-solid fa-brush"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="{% url 'link_create' page.slug %}" class="dropdown-item btn btn-outline-primary my-2 my-sm-0 text-white" type="submit">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            Add Link
+                                        </div>
+                                        <div class="col text-end">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="{% url 'page_update' page.slug %}" class=" dropdown-item btn btn-outline-info my-2 my-sm-0 text-white" type="submit">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            Update
+                                        </div>
+                                        <div class="col text-end">
+                                            <i class="fa-solid fa-pencil"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="{% url 'page_delete' page.slug %}" class=" dropdown-item btn btn-outline-warning text-white">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-start">
+                                            Delete
+                                        </div>
+                                        <div class="col text-end">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                </a>
-                <a href="{% url 'link_create' page.slug %}" class="dropdown-item btn btn-outline-primary my-2 my-sm-0 text-white" type="submit">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-start">
-                                Add Link
-                            </div>
-                            <div class="col text-end">
-                                <i class="fa-solid fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="{% url 'page_update' page.slug %}" class=" dropdown-item btn btn-outline-info my-2 my-sm-0 text-white" type="submit">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-start">
-                                Update
-                            </div>
-                            <div class="col text-end">
-                                <i class="fa-solid fa-pencil"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="{% url 'page_delete' page.slug %}" class=" dropdown-item btn btn-outline-warning text-white">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col text-start">
-                                Delete
-                            </div>
-                            <div class="col text-end">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <a href="{% url 'page_create'  %}" class="btn btn-outline-success my-2 my-sm-0 ms-5" type="submit"><i class="fa-solid fa-circle-plus"></i> Create Page</a>
-            <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-5"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout ({{user.profile.username}})</a>
-            <a href="{% url 'profile' %}"><img class="img-fluid rounded-pill mx-2 ms-3 border border-success " src="{{user.profile.get_avatar_url}}" alt="" width="40px"></a>
-          </div>
-            
-            
-      
-    </form>
+                </li>
+                <li class="nav-item my-2 me-4">
+                    <a href="{% url 'page_create'  %}" class="btn btn-outline-success my-2 my-sm-0 " type="submit"><i class="fa-solid fa-circle-plus"></i> Create Page</a>
+                </li>
+                <li class="nav-item my-2 me-4">
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout ({{user.profile.username}})</a>
+                </li>
+                <li class="nav-item my-2">
+                    <a href="{% url 'profile' %}"><img class="img-fluid rounded-pill mx-2  border border-success " src="{{user.profile.get_avatar_url}}" alt="" width="40px"></a>
+                </li>
+            </ul>
+        </div>
+</div>
 </nav>
 {% endif %}
 
