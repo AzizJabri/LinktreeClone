@@ -45,7 +45,7 @@ class Profile(models.Model):
     location = CountryField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     avatar = LongerImageField(
-        upload_to=change_avatar_name, blank=False, default='default.jpg')
+        upload_to=change_avatar_name, blank=False, default='default_ibxmy4.jpg')
 
     def __str__(self) -> str:
         return self.user.email
