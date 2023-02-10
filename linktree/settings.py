@@ -25,16 +25,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
+custom_domains = [
+    "linktreeclone-production.up.railway.app", "linktree.azizjb.me"]
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"
+                 ]
 # SECURITY WARNING: don't run with debug turned on in production!
 IS_DEBUG = os.environ.get('IS_DEBUG')
+IS_RAILWAY = os.environ.get('IS_RAILWAY')
+
 if IS_DEBUG == "True":
     DEBUG = True
 else:
     DEBUG = False
 
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0",
-                 "linktreeclone-production.up.railway.app", "linktree.azizjb.me"]
+if IS_RAILWAY == "True":
+    ALLOWED_HOSTS += custom_domains
 
 
 # Application definition
@@ -175,7 +181,8 @@ SECURE_HSTS_PRELOAD = True
 """
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-CSRF_TRUSTED_ORIGINS = ['https://linktreeclone-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = [
+    'https://linktreeclone-production.up.railway.app', 'https://linktree.azizjb.me']
 
 
 MEDIA_ROOT = BASE_DIR / 'media'
