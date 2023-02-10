@@ -25,17 +25,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 "app-linktree.herokuapp.com", "0.0.0.0"]
+custom_domains = [
+    "linktreeclone-production.up.railway.app", "linktree.azizjb.me"]
 
-"""
-if IS_HEROKU:
-    ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"
+                 ]
+# SECURITY WARNING: don't run with debug turned on in production!
+IS_DEBUG = os.environ.get('IS_DEBUG')
+IS_RAILWAY = os.environ.get('IS_RAILWAY')
+
+if IS_DEBUG == "True":
+    DEBUG = True
 else:
-    ALLOWED_HOSTS = []
-"""
+    DEBUG = False
+
+if IS_RAILWAY == "True":
+    ALLOWED_HOSTS += custom_domains
 
 
 # Application definition
@@ -173,7 +178,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 """
 
-CSRF_TRUSTED_ORIGINS = ['https://app-linktree.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://app-linktree.herokuapp.com', 'http://linktree.azizjb.me']
 
 
 STATICFILES_DIRS = [
@@ -181,16 +187,16 @@ STATICFILES_DIRS = [
 ]
 
 
-DEFAULT_FILE_STORAGE = 'linktree.custom_azure.AzureMediaStorage'
-STATICFILES_STORAGE = 'linktree.custom_azure.AzureStaticStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+STATICFILES_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
-STATIC_LOCATION = "static"
-MEDIA_LOCATION = "media"
 AZURE_OVERWRITE_FILES = True
 AZURE_ACCOUNT_NAME = "linktree"
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
 
+STATIC_LOCATION = "static"
+MEDIA_LOCATION = "media"
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
