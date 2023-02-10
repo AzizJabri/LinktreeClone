@@ -179,8 +179,14 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 """
 
+<< << << < HEAD
 CSRF_TRUSTED_ORIGINS = [
     "https://linktreeclone-dev.up.railway.app", 'http://linktree.azizjb.me']
+== == == =
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+CSRF_TRUSTED_ORIGINS = [
+    'https://linktreeclone-production.up.railway.app', 'https://linktree.azizjb.me']
+>>>>>> > 0e1fa0a(fixed csrf)
 
 
 CLOUD_NAME = os.environ.get('CLOUD_NAME')
