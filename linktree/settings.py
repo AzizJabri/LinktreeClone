@@ -185,10 +185,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://app-linktree.herokuapp.com', 'http://linktree.azizjb.me']
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles'),
-]
-
 CLOUD_NAME = os.environ.get('CLOUD_NAME')
 API_KEY = os.environ.get('API_KEY')
 API_SECRET = os.environ.get('API_SECRET')
