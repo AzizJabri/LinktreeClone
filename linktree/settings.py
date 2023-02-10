@@ -26,15 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
-
-custom_domains = [
-    "linktreeclone-production.up.railway.app", "linktree.azizjb.me", "linktreeclone-dev.up.railway.app"]
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"
-                 ]
-# SECURITY WARNING: don't run with debug turned on in production!
 IS_DEBUG = os.environ.get('IS_DEBUG')
 IS_RAILWAY = os.environ.get('IS_RAILWAY')
+
+
+custom_domains = ["linktreeclone-production.up.railway.app",
+                  "linktree.azizjb.me", "linktreeclone-dev.up.railway.app"]
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"]
 
 if IS_DEBUG == "True":
     DEBUG = True
@@ -59,7 +58,6 @@ INSTALLED_APPS = [
     'pages',
     "hitcount",
     "colorfield",
-    'storages',
 ]
 
 MIDDLEWARE = [
