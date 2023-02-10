@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 
 custom_domains = [
-    "linktreeclone-production.up.railway.app", "linktree.azizjb.me"]
+    "linktreeclone-production.up.railway.app", "linktree.azizjb.me", "linktreeclone-dev.up.railway.app"]
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"
                  ]
@@ -182,7 +182,7 @@ SECURE_HSTS_PRELOAD = True
 """
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://app-linktree.herokuapp.com', 'http://linktree.azizjb.me']
+    "https://linktreeclone-dev.up.railway.app", 'http://linktree.azizjb.me']
 
 
 CLOUD_NAME = os.environ.get('CLOUD_NAME')
