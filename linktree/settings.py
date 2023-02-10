@@ -34,7 +34,7 @@ else:
 
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0",
-                 "linktreeclone-production.up.railway.app"]
+                 "linktreeclone-production.up.railway.app", "linktree.azizjb.me"]
 
 
 # Application definition
