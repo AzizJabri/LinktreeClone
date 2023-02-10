@@ -12,7 +12,7 @@
     <form class="form-inline">
       <a href="{% url 'page_create' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa-solid fa-circle-plus"></i> Create Page</a>
       <a href="{% url 'logout'%}" class="btn btn-outline-danger ms-5"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout ({{user.profile.username}}) </a>
-      <a href="{% url 'profile' %}"><img class="img-fluid rounded-pill mx-2 ms-3 border border-success " src="{{user.profile.avatar.url}}" alt="" width="40px"></a>
+      <a href="{% url 'profile' %}"><img class="img-fluid rounded-pill mx-2 ms-3 border border-success " src="{{user.profile.get_avatar_url}}" alt="" width="40px"></a>
     </form>
 </nav>
 {% endblock navbar %}

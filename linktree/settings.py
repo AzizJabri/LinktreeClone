@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary_storage
 load_dotenv()
 
 
@@ -203,7 +204,10 @@ CLOUDINARY_STORAGE = {
 STATIC_LOCATION = "static"
 MEDIA_LOCATION = "media"
 
-MEDIA_URL = '/media/'  # or any prefix you choose
+MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

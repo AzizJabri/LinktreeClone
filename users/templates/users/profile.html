@@ -4,7 +4,7 @@
 {% block content %}
 {% load static %}
 <div class="container text-center p-2">
-    <img class="img-fluid rounded-pill w-25" src="{{ user.profile.avatar.url }}" alt="{{user.profile.username}} image" > <br>
+    <img class="img-fluid rounded-pill w-25" src="{{ user.profile.get_avatar_url }}" alt="{{user.profile.username}} image" > <br>
     <h1 id="username_title">{{user.profile.username}}</h1>
 </div>
 <form method="post" enctype="multipart/form-data">
