@@ -59,10 +59,3 @@ class Profile(models.Model):
         transformed_url = parts[0] + 'upload/' + \
             transformations + '/' + parts[1]
         return transformed_url
-
-
-"""
-
-https://res.cloudinary.com/dpvdcwtff/image/upload/v1/media/https://res.cloudinary.com/dpvdcwtff/image/upload/w_300%2Cc_fill%2Car_1:1/v1/media/avatars/ebc28c49-d215-41b1-bb2a-16c982c0d0aa/img_lyyuld
-
-"""
