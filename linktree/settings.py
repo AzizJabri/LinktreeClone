@@ -181,7 +181,7 @@ SECURE_HSTS_PRELOAD = True
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://linktreeclone-dev.up.railway.app", 'http://linktree.azizjb.me']
+    "https://linktreeclone-dev.up.railway.app", 'https://linktree.azizjb.me']
 
 
 CLOUD_NAME = os.environ.get('CLOUD_NAME')
