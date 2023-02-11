@@ -26,6 +26,7 @@ COPY . $DockerHOME
 # run this command to install all dependencies  
 RUN pip install -r requirements.txt  
 
+RUN python manage.py makemigrations && python manage.py migrate
 
 
 CMD python manage.py migrate && gunicorn linktree.wsgi:application --bind 0.0.0.0:$PORT
