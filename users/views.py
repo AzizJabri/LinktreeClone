@@ -1,4 +1,4 @@
-import random
+from random import randint
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 from django.views.decorators.debug import sensitive_post_parameters
@@ -96,7 +96,7 @@ class RegisterView(View):
                 user=user)
             profile.save()
             profile.username = slugify(
-                user.first_name + " " + user.last_name + random.randint(1, 99))
+                user.first_name + " " + user.last_name + randint(1, 99))
             profile.save()
             login(request, user)
             messages.success(
