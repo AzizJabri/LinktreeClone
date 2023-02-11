@@ -96,7 +96,7 @@ class RegisterView(View):
                 user=user)
             profile.save()
             profile.username = slugify(
-                user.first_name + " " + user.last_name + randint(1, 99))
+                user.first_name + " " + user.last_name + str(randint(0, 1000)))
             profile.save()
             login(request, user)
             messages.success(
