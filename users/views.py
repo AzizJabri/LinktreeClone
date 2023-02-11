@@ -94,7 +94,6 @@ class RegisterView(View):
             user = form.save()
             profile = Profile.objects.create(
                 user=user)
-            profile.save()
             profile.username = slugify(
                 user.first_name + " " + user.last_name + random.randint(1, 99))
             profile.save()
