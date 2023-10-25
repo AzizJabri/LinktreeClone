@@ -31,7 +31,7 @@ IS_RAILWAY = os.environ.get('IS_RAILWAY')
 
 
 custom_domains = ["linktreeclone-production.up.railway.app",
-                  "linktree.azizjb.me", "linktreeclone-dev.up.railway.app"]
+                  "linktree.azizjb.me", "linktreeclone-dev.up.railway.app", "https://linktree-qkoj.onrender.com"]
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', "0.0.0.0"]
 
